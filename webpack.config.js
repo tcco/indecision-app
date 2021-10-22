@@ -5,6 +5,7 @@ const path = require('path');
 
 module.exports = {
   entry: './src/app.jsx',
+  mode: 'development',
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
@@ -16,11 +17,15 @@ module.exports = {
         test: /\.jsx$/,
         exclude: /node_modules/,
       },
+      {
+        test: /\.s?css$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
     ],
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'cheap-module-source-map',
   // replacement for live-server
   devServer: {
-    contentBase: path.resolve(__dirname, 'public'),
+    static: path.resolve(__dirname, 'public'),
   },
 };
